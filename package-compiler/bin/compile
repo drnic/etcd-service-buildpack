@@ -1,0 +1,4 @@
+root="$(pwd)"
+mv redis* /tmp/redis
+cd /tmp/redis
+make PREFIX="$root" -j4 install
