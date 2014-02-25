@@ -108,3 +108,8 @@ Inside vagrant:
 cd /vagrant
 PORT=5555 ./bin/configure-and-run ./bin/redis-server etc/runtime.conf
 ```
+
+## Credits
+
+The buildpack portion was based on 
+Based on https://github.com/dpiddy/heroku-buildpack-redis
