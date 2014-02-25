@@ -2,7 +2,7 @@ root="$(pwd)"
 mv blobs /tmp/blobs
 
 cd /tmp/blobs/redis
-tar xfz redis-2.6.16.tar.gz
-cd redis-2.6.16
+tar xfz redis-2.8.6.tar.gz
+cd redis-2.8.6
 
 make PREFIX="$root" -j4 install
