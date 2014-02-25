@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Simple implementation of a blob solution
+# * fetch required blobs from known public sources
+# * store in blobs/ folder
+
+mkdir -p blobs/redis
+
+if [[ ! -f blobs/redis/redis-2.6.16.tar.gz ]]; then
+  echo "blobs/redis/redis-2.6.16.tar.gz: fetching"
+  curl http://download.redis.io/releases/redis-2.6.16.tar.gz -o blobs/redis/redis-2.6.16.tar.gz
+else
+  echo "blobs/redis/redis-2.6.16.tar.gz: exists"
+fi
+
+if [[ ! -f blobs/redis/redis-2.8.6.tar.gz ]]; then
+  echo "blobs/redis/redis-2.8.6.tar.gz: fetching"
+  curl http://download.redis.io/releases/redis-2.8.6.tar.gz -o blobs/redis/redis-2.8.6.tar.gz
+else
+  echo "blobs/redis/redis-2.8.6.tar.gz: exists"
+fi
+
