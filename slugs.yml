@@ -1,4 +1,0 @@
----
-packages:
-  redis-2.6.16: https://api.anvilworks.org/slugs/784115c7-671c-4805-9505-3f35266a1482.tgz
-  redis-2.8.6: https://api.anvilworks.org/slugs/ac8f4abb-c416-49c5-ace7-a51b3aa246f5.tgz

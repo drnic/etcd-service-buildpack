@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -z "$PORT" ]; then
+   echo "Missing \$PORT" >&2
+   exit 1
+fi
+
+cat >etc/runtime.conf <<EOF
+port $PORT
+loglevel verbose
+EOF
+
+if [ -n "$REDIS_PASSWORD" ]; then
+    echo "requirepass $REDIS_PASSWORD" >> etc/runtime.conf
+fi
+
+exec "$@"

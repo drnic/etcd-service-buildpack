@@ -1,1 +1,59 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+set -e
+set -o pipefail
+
+BUILD_DIR="$1"
+CACHE_DIR="$2"
+
+say() {
+    echo "-----> $*"
+}
+
+warn() {
+    echo >&2 " !     $*"
+}
+
+error() {
+    warn "$*"
+    exit 1
+}
+
+indent() {
+    sed -u 's/^/       /'
+}
+
+unpack_url() {
+    url="$1"
+    path="$2"
+
+    mkdir -p "$path"
+
+    if ! curl --fail --retry 3 --silent -o - "$url" | tar -C "$path" -zxf -; then
+        error "Fetching and unpacking \"$url\" to \"$path\" failed."
+    fi
+}
+
+BUILDPACK_DIR="$(dirname $(dirname $0))"
+source $BUILDPACK_DIR/config/slugs
+
+mkdir -p "$BUILD_DIR"
+cd "$BUILD_DIR"
+
+if [ ! -e "redis-version" ]; then
+    error "No redis-version file. Check it into your repository."
+fi
+
+redis_version="$(< redis-version)"
+
+say "Using redis version $redis_version"
+unpack_url ${SLUGS[${redis_version}]} .
+mkdir -p etc
+cp "$BUILDPACK_DIR/etc/redis-$redis_version.conf" etc/redis.conf
+cp "$BUILDPACK_DIR/bin/configure-and-run" bin
+mkdir -p .profile.d
+echo "export PATH=\"\$HOME/bin:\$PATH\"" > .profile.d/redis.sh
+
+if [ ! -e Procfile ]; then
+    echo "web: configure-and-run redis-server etc/redis.conf" > Procfile
+fi
