@@ -2,15 +2,15 @@
 
 This project is primarily a buildpack to run a Redis Server; but also includes an internal asset-buildpack for compiling Redis source into executables.
 
-Currently the buildpack includes etcd 2.6.16 and 0.3.0.
+Currently the buildpack includes etcd 0.3.0.
 
-## Usage
+## Demo Usage
 
 Create a new project with a `etcd-version` file containing either `0.3.0`:
 
 ```
-mkdir -p my-etcd-service
-cd my-etcd-service
+mkdir -p /tmp/`whoami`-etcd-service
+cd /tmp/`whoami`-etcd-service
 echo "0.3.0" > etcd-version
 ```
 
@@ -19,13 +19,29 @@ Now deploy to your favourite buildpack-supporting PaaS.
 For Cloud Foundry:
 
 ```
-cf push my-etcd-service -b https://github.com/drnic/etcd-service-buildpack.git
+cf push `whoami`-etcd-service -b https://github.com/drnic/etcd-service-buildpack.git
+```
+
+And later delete with:
+
+```
+cf delete `whoami`-etcd-service
 ```
 
 For Heroku:
 
 ```
-heroku create my-etcd-service -b https://github.com/drnic/etcd-service-buildpack.git
+git init
+git add .
+git commit -m "v0.3.0 etcd service"
+heroku create `whoami`-etcd-service -b https://github.com/drnic/etcd-service-buildpack.git
+git push heroku master
+```
+
+And later destroy with:
+
+```
+heroku apps:destroy `whoami`-etcd-service --confirm `whoami`-etcd-service
 ```
 
 ## Development
