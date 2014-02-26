@@ -1,6 +1,6 @@
-# Buildpack to run Redis Server
+# Buildpack to run Etcd Server
 
-This project is primarily a buildpack to run a Redis Server; but also includes an internal asset-buildpack for compiling Redis source into executables.
+This project is primarily a buildpack to run a Etcd Server; but also includes an internal asset-buildpack for compiling Etcd source into executables.
 
 Currently the buildpack includes etcd 0.3.0.
 
@@ -48,12 +48,12 @@ heroku apps:destroy `whoami`-etcd-service --confirm `whoami`-etcd-service
 
 There are two stages of development:
 
-* Adding & compiling new versions of Redis
+* Adding & compiling new versions of Etcd
 * Developing the buildpack (`bin/compile`, `bin/detect`, `bin/release`)
 
-For each new version of Redis supported, the `config/slugs` file is updated with the accessible URL of the pre-compiled version of etcd.
+For each new version of Etcd supported, the `config/slugs` file is updated with the accessible URL of the pre-compiled version of etcd.
 
-### Adding & compiling new versions of Redis
+### Adding & compiling new versions of Etcd
 
 Extend the `bin/fetch_assets` script to fetch the new etcd src asset. Then run it to fetch it (and all other etcd versions):
 
@@ -61,7 +61,7 @@ Extend the `bin/fetch_assets` script to fetch the new etcd src asset. Then run i
 ./bin/fetch_assets
 ```
 
-Now modify `etcd-compiler/bin/compile` for the new version Redis (in future this will be beautifully automated) in the blobs folder.
+Now modify `etcd-compiler/bin/compile` for the new version Etcd (in future this will be beautifully automated) in the blobs folder.
 
 To create the pre-compiled slugs:
 
@@ -72,7 +72,7 @@ anvil build . -b etcd-compiler -p
 
 The last line is the published slug URL.
 
-Now add this into `config/slugs` so buildpack users will have access to the pre-compiled version of Redis.
+Now add this into `config/slugs` so buildpack users will have access to the pre-compiled version of Etcd.
 
 ### Developing the buildpack
 
@@ -107,7 +107,7 @@ $ tree
 └── etcd-version
 ```
 
-The `etcd-version` file comes from the built-in `testapp` used above. Everything else is included from the buildpack. `bin/etcd-server` contains the compiled Redis server.
+The `etcd-version` file comes from the built-in `testapp` used above. Everything else is included from the buildpack. `bin/etcd-server` contains the compiled Etcd server.
 
 ### Run locally
 
