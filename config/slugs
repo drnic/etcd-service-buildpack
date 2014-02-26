@@ -1,3 +1,2 @@
 declare -A SLUGS
-SLUGS["2.6.16"]=https://api.anvilworks.org/slugs/784115c7-671c-4805-9505-3f35266a1482.tgz
-SLUGS["2.8.6"]=https://api.anvilworks.org/slugs/ac8f4abb-c416-49c5-ace7-a51b3aa246f5.tgz
+SLUGS["0.3.0"]=https://api.anvilworks.org/slugs/27363832-cb4e-41dc-8135-b9157b5f9926.tgz

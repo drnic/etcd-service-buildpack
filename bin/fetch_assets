@@ -4,19 +4,18 @@
 # * fetch required blobs from known public sources
 # * store in blobs/ folder
 
-mkdir -p blobs/redis
+mkdir -p blobs/etcd
 
-if [[ ! -f blobs/redis/redis-2.6.16.tar.gz ]]; then
-  echo "blobs/redis/redis-2.6.16.tar.gz: fetching"
-  curl http://download.redis.io/releases/redis-2.6.16.tar.gz -o blobs/redis/redis-2.6.16.tar.gz
+if [[ ! -f blobs/etcd/etcd-0.3.0.tar.gz ]]; then
+  echo "blobs/etcd/etcd-0.3.0.tar.gz: fetching"
+  curl -L https://github.com/coreos/etcd/archive/v0.3.0.tar.gz -o blobs/etcd/etcd-0.3.0.tar.gz
 else
-  echo "blobs/redis/redis-2.6.16.tar.gz: exists"
+  echo "blobs/etcd/etcd-0.3.0.tar.gz: exists"
 fi
 
-if [[ ! -f blobs/redis/redis-2.8.6.tar.gz ]]; then
-  echo "blobs/redis/redis-2.8.6.tar.gz: fetching"
-  curl http://download.redis.io/releases/redis-2.8.6.tar.gz -o blobs/redis/redis-2.8.6.tar.gz
+if [[ ! -f blobs/go/go1.2.linux-amd64.tar.gz ]]; then
+  echo "blobs/go/go1.2.linux-amd64.tar.gz: fetching"
+  curl -L https://go.googlecode.com/files/go1.2.linux-amd64.tar.gz -o blobs/go/go1.2.linux-amd64.tar.gz
 else
-  echo "blobs/redis/redis-2.8.6.tar.gz: exists"
+  echo "blobs/go1/go1.2.linux-amd64.tar.gz: exists"
 fi
-

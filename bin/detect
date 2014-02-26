@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "redis"
+echo "etcd"
 exit 0

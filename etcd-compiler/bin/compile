@@ -1,0 +1,17 @@
+root="$(pwd)"
+
+mv blobs /tmp/blobs
+cd /tmp/blobs/go
+tar xfz go1.2.linux-amd64.tar.gz
+
+export GOROOT=/tmp/blobs/go/go
+export PATH=$GOROOT/bin:$PATH
+
+cd /tmp/blobs/etcd
+tar xfz etcd-0.3.0.tar.gz
+cd etcd-0.3.0
+
+./build
+
+mkdir -p ${root}/bin/
+mv bin/* ${root}/bin/

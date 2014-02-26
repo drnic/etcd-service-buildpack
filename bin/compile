@@ -40,20 +40,16 @@ source $BUILDPACK_DIR/config/slugs
 mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"
 
-if [ ! -e "redis-version" ]; then
-    error "No redis-version file. Check it into your repository."
-fi
+etcd_version="$(< etcd-version)"
+etcd_version=${etcd_version:-"0.3.0"}
 
-redis_version="$(< redis-version)"
-
-say "Using redis version $redis_version"
-unpack_url ${SLUGS[${redis_version}]} .
+say "Using etcd version $etcd_version"
+unpack_url ${SLUGS[${etcd_version}]} .
 mkdir -p etc
-cp "$BUILDPACK_DIR/etc/redis-$redis_version.conf" etc/redis.conf
-cp "$BUILDPACK_DIR/bin/configure-and-run" bin
+
 mkdir -p .profile.d
-echo "export PATH=\"\$HOME/bin:\$PATH\"" > .profile.d/redis.sh
+echo "export PATH=\"\$HOME/bin:\$PATH\"" > .profile.d/etcd.sh
 
 if [ ! -e Procfile ]; then
-    echo "web: configure-and-run redis-server etc/redis.conf" > Procfile
+    echo "web: bin/etcd -name etcd-test -addr 0.0.0.0:\$PORT -peer-addr 0.0.0.0:7001 -data-dir data -snapshot true" > Procfile
 fi
