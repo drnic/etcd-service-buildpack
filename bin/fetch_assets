@@ -13,9 +13,11 @@ else
   echo "blobs/etcd/etcd-0.3.0.tar.gz: exists"
 fi
 
-if [[ ! -f blobs/go/go1.2.linux-amd64.tar.gz ]]; then
-  echo "blobs/go/go1.2.linux-amd64.tar.gz: fetching"
-  curl -L https://go.googlecode.com/files/go1.2.linux-amd64.tar.gz -o blobs/go/go1.2.linux-amd64.tar.gz
+mkdir -p blobs/go
+
+if [[ ! -f blobs/go/go1.2.1.linux-amd64.tar.gz ]]; then
+  echo "blobs/go/go1.2.1.linux-amd64.tar.gz: fetching"
+  curl -L https://go.googlecode.com/files/go1.2.1.linux-amd64.tar.gz -o blobs/go/go1.2.1.linux-amd64.tar.gz
 else
-  echo "blobs/go1/go1.2.linux-amd64.tar.gz: exists"
+  echo "blobs/go1/go1.2.1.linux-amd64.tar.gz: exists"
 fi

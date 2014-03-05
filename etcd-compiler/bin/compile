@@ -2,7 +2,7 @@ root="$(pwd)"
 
 mv blobs /tmp/blobs
 cd /tmp/blobs/go
-tar xfz go1.2.linux-amd64.tar.gz
+tar xfz go1.2.1.linux-amd64.tar.gz
 
 export GOROOT=/tmp/blobs/go/go
 export PATH=$GOROOT/bin:$PATH
