@@ -29,13 +29,15 @@ unpack_url() {
 
     mkdir -p "$path"
 
+    say "Trying to fetch etcd binaries slug..."
+
     if ! curl --fail --retry 3 --silent -o - "$url" | tar -C "$path" -zxf -; then
         error "Fetching and unpacking \"$url\" to \"$path\" failed."
     fi
 }
 
 BUILDPACK_DIR="$(dirname $(dirname $0))"
-source $BUILDPACK_DIR/config/slugs
+source $BUILDPACK_DIR/config/compiled_packages
 
 mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"
@@ -51,5 +53,6 @@ mkdir -p .profile.d
 echo "export PATH=\"\$HOME/bin:\$PATH\"" > .profile.d/etcd.sh
 
 if [ ! -e Procfile ]; then
+    say "No Procfile, so adding one..."
     echo "web: bin/etcd -name etcd-test -addr 0.0.0.0:\$PORT -peer-addr 0.0.0.0:7001 -data-dir data -snapshot true" > Procfile
 fi
