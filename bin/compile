@@ -35,7 +35,7 @@ unpack_url() {
 }
 
 BUILDPACK_DIR="$(dirname $(dirname $0))"
-source $BUILDPACK_DIR/config/slugs
+source $BUILDPACK_DIR/config/compiled_packages
 
 mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"
